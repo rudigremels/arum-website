@@ -315,7 +315,7 @@
     calMonths.innerHTML = '';
     const today = new Date();
     const todayStr = ymd(today);
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 12; i++) {
       const d = new Date(today.getFullYear(), today.getMonth() + i, 1);
       calMonths.appendChild(renderMonth(d.getFullYear(), d.getMonth(), booked, todayStr));
     }

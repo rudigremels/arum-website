@@ -166,13 +166,22 @@ a {
   gap: 0.7rem;
   justify-self: start;
 }
-.nav__menu span {
+.nav__menu-icon {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 20px;
+  font-style: normal;
+}
+.nav__menu-icon span {
   display: block;
-  width: 18px;
+  width: 100%;
   height: 1px;
   background: var(--ink);
+  transition: width 0.3s var(--ease);
 }
-.nav__menu span + span { margin-top: 5px; }
+.nav__menu-icon span:last-child { width: 70%; }
+.nav__menu:hover .nav__menu-icon span:last-child { width: 100%; }
 .nav__menu em {
   font-style: normal;
   font-size: 0.72rem;
@@ -736,14 +745,38 @@ a {
 
 .cal__months {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem 2.5rem;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(240px, 30vw, 280px);
+  gap: 2.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
 }
-@media (max-width: 800px) {
-  .cal__months { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 1.75rem; }
+.cal__months::-webkit-scrollbar {
+  height: 4px;
 }
+.cal__months::-webkit-scrollbar-track {
+  background: var(--line);
+  border-radius: 2px;
+}
+.cal__months::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 2px;
+}
+.cal__months::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-soft);
+}
+
+.cal-month {
+  scroll-snap-align: start;
+}
+
 @media (max-width: 520px) {
-  .cal__months { grid-template-columns: 1fr; gap: 2rem; }
+  .cal__months { grid-auto-columns: 88%; }
 }
 
 .cal__loading {
